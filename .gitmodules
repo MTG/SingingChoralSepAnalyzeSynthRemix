@@ -1,0 +1,12 @@
+[submodule "Wave-U-Net"]
+	path = Wave-U-Net
+	url = https://github.com/pc2752/Wave-U-Net.git
+[submodule "pytorch"]
+	path = open-unmix
+	url = https://github.com/pc2752/open-unmix-pytorch.git
+[submodule "asteroid"]
+	path = asteroid
+	url = https://github.com/MTG/asteroid.git
+[submodule "DeepConvSep"]
+	path = DeepConvSep
+	url = https://github.com/MTG/DeepConvSep.git
