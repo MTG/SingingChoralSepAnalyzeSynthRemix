@@ -7,3 +7,6 @@
 [submodule "DeepConvSep"]
 	path = DeepConvSep
 	url = https://github.com/MTG/DeepConvSep.git
+[submodule "asteroid"]
+	path = asteroid
+	url = https://github.com/pc2752/asteroid.git
