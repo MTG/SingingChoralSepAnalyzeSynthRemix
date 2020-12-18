@@ -10,6 +10,7 @@ import pandas as pd
 from tqdm import tqdm
 from pprint import pprint
 
+import time
 
 from mir_eval import separation
 
@@ -17,47 +18,8 @@ import importlib.util
 import sys
 
 
-convtasnet_dict = {'use_gpu': 0, 'exp_dir': './SATB/ALL_uc2/', 'n_save_ex': -1, 'sample_rate': 22020, 'train_conf': {'data': {'mode': 'min', 'nondefault_nsrc': None, 'sample_rate': 22020, 'task': 'sep_clean', 'train_dir': '/home/pc2752/share/Darius/Wave-U-Net/satb_dataset_all.hdf5', 'valid_dir': '/home/pc2752/share/Darius/Wave-U-Net/satb_dataset_all.hdf5'}, 'filterbank': {'kernel_size': 16, 'n_filters': 512, 'stride': 8}, 'main_args': {'exp_dir': './SATB/ALL_uc2/', 'help': None}, 'masknet': {'bn_chan': 128, 'hid_chan': 512, 'mask_act': 'relu', 'n_blocks': 8, 'n_repeats': 3, 'n_src': 4, 'skip_chan': 128}, 'optim': {'lr': 0.001, 'optimizer': 'adam', 'weight_decay': 0.0}, 'positional arguments': {}, 'training': {'batch_size': 2, 'early_stop': False, 'epochs': 2000, 'half_lr': True, 'num_workers': 4}}}
+import config
 
-cfg = {'model_config':\
- {'estimates_path': './Source_Estimates', \
- 'data_path': 'data', \
- 'satb_path_train': '../data/satb_dst/train/raw_audio', \
- 'satb_path_valid': '../data/satb_dst/valid/raw_audio', \
- 'satb_path_test': '../data/satb_dst/test/raw_audio', \
- 'satb_hdf5_filepath': './satb_dataset_only_csd.hdf5', \
- 'satb_debug': False, \
- 'satb_use_case': 2, \
- 'model_base_dir': 'checkpoints', \
- 'log_dir': 'logs', \
- 'batch_size': 4, \
- 'init_sup_sep_lr': 0.0001, \
- 'epoch_it': 2000, \
- 'cache_size': 4000, \
- 'num_workers': 4, \
- 'num_snippets_per_track': 100, \
- 'num_layers': 6, \
- 'filter_size': 15, \
- 'merge_filter_size': 5, \
- 'input_filter_size': 15, \
- 'output_filter_size': 1, \
- 'num_initial_filters': 16, \
- 'num_frames': 33536, \
- 'expected_sr': 22050, \
- 'mono_downmix': True, \
- 'output_type': 'direct', \
- 'output_activation': 'tanh', \
- 'context': False, \
- 'network': 'unet_spectrogram', \
- 'upsampling': 'linear', \
- 'task': 'satb', \
- 'augmentation': True, \
- 'raw_audio_loss': True, \
- 'worse_epochs': 50, \
- 'source_names': ['soprano', 'alto', 'tenor', 'bass'], \
- 'num_sources': 4, \
- 'num_channels': 1}, \
- 'experiment_id': 'unet_baseline_csd_usecase2'}
 
 def convtasnet(conf):
 
@@ -75,7 +37,7 @@ def convtasnet(conf):
 
     torch.no_grad().__enter__()
 
-    mix, fs = sf.read('/home/pc2752/share//Darius/Wave-U-Net/test_set_mixes/dcs/DCS_TPQuartetA_mix.wav')
+    mix, fs = sf.read(conf["input_path"])
 
     mix = torch.from_numpy(mix).type(torch.FloatTensor)
 
@@ -88,12 +50,40 @@ def unet(cfg):
     import Evaluate
 
     model_config = cfg["model_config"]
-    model_path = os.path.join('/home/pc2752/share/Darius/Wave-U-Net/Source_Estimates/unet_968405-112000_csd',"968405-112000")
-    input_path = os.path.join('/home/pc2752/share//Darius/Wave-U-Net/test_set_mixes/dcs/DCS_TPQuartetA_mix.wav')
+    model_path = cfg["model_path"]
+    input_path = cfg['input_path']
     output_path = './'
     outputs = Evaluate.produce_source_estimates(model_config, model_path, input_path, output_path)
 
     return outputs
+
+def waveunet(cfg):
+    sys.path.append('./Wave-U-Net')
+    import Evaluate
+
+    model_config = cfg["model_config"]
+    model_path = cfg["model_path"]
+    input_path = cfg['input_path']
+    output_path = './'
+    outputs = Evaluate.produce_source_estimates(model_config, model_path, input_path, output_path)
+
+    return outputs
+
+
+def highlight_max(data, color='yellow'):
+    '''
+    highlight the maximum in a Series or DataFrame
+    '''
+    attr = 'background-color: {}'.format(color)
+    #remove % and cast to float
+    data = data.replace('%','', regex=True).astype(float)
+    if data.ndim == 1:  # Series from .apply(axis=0) or axis=1
+        is_max = data == data.max()
+        return [attr if v else '' for v in is_max]
+    else:  # from .apply(axis=None)
+        is_max = data == data.max().max()
+        return pd.DataFrame(np.where(is_max, attr, ''),
+                            index=data.index, columns=data.columns)
 
 def main():
 
@@ -105,18 +95,40 @@ def main():
 
     tenor, fs = sf.read('/home/pc2752/share//Darius/data/satb_dst/test_dcs/raw_audio/DCS_TPQuartetA/DCS_TPQuartetA_tenor_1.wav')
 
+    start_time = time.time()
 
-    outputs_conv = convtasnet(convtasnet_dict)
-    outputs_unet = unet(cfg)
+    outputs_conv = convtasnet(config.config_convtasnet)
+    end_time_conv = time.time()- start_time
+
+    start_time = time.time()
+    outputs_unet = unet(config.cnfig_unet_baseline_csd_usecase2)
+    end_time_unet = time.time()- start_time
+
+    start_time = time.time()
+    outputs_waveunet = waveunet(config.cnfig_waveunet_all_usecase2)
+    end_time_waveunet = time.time()- start_time
 
     sdr_conv, sir_conv, sar_conv, _ = separation.bss_eval_sources(np.array([soprano, alto, tenor, bass]), outputs_conv[:, :soprano.shape[0]].detach().numpy())
 
 
     sdr_unet, sir_unet, sar_unet, _ = separation.bss_eval_sources(np.array([soprano[:outputs_unet['soprano'][:soprano.shape[0]].shape[0]], alto[:outputs_unet['soprano'][:soprano.shape[0]].shape[0]], tenor[:outputs_unet['soprano'][:soprano.shape[0]].shape[0]], bass[:outputs_unet['soprano'][:soprano.shape[0]].shape[0]]]), np.array([outputs_unet['soprano'][:soprano.shape[0]], outputs_unet['alto'][:soprano.shape[0]], outputs_unet['tenor'][:soprano.shape[0]], outputs_unet['bass'][:soprano.shape[0]]]   ))
     
-    print_data = pd.DataFrame({'model':['unet','convtasnet'], 'usecase': ['1','1'], 'sdr_soprano':[sdr_unet[0], sdr_conv[0]], 'sdr_alto':[sdr_unet[1], sdr_conv[1]], 'sdr_tenor':[sdr_unet[2], sdr_conv[2]], 'sdr_bass':[sdr_unet[3], sdr_conv[3]] })
+    sdr_waveunet, sir_waveunet, sar_waveunet, _ = separation.bss_eval_sources(np.array([soprano[:outputs_waveunet['soprano'][:soprano.shape[0]].shape[0]], alto[:outputs_waveunet['soprano'][:soprano.shape[0]].shape[0]], tenor[:outputs_waveunet['soprano'][:soprano.shape[0]].shape[0]], bass[:outputs_waveunet['soprano'][:soprano.shape[0]].shape[0]]]), np.array([outputs_waveunet['soprano'][:soprano.shape[0]], outputs_waveunet['alto'][:soprano.shape[0]], outputs_waveunet['tenor'][:soprano.shape[0]], outputs_waveunet['bass'][:soprano.shape[0]]]   ))
+
+    print_data = pd.DataFrame({'model':['unet','convtasnet', 'waveunet'], 'trainusecase': ['1','2','2'],'evalusecase': ['1','1','1'],\
+     'sdr_soprano':[sdr_unet[0], sdr_conv[0], sdr_waveunet[0]], 'sdr_alto':[sdr_unet[1], sdr_conv[1], sdr_waveunet[1] ],\
+     'sdr_tenor':[sdr_unet[2], sdr_conv[2], sdr_waveunet[2]], 'sdr_bass':[sdr_unet[3], sdr_conv[3], sdr_waveunet[2]], 'time': [end_time_unet, end_time_conv, end_time_waveunet] })
+
+    pd.options.display.float_format = "{:,.2f}".format
+
+    # print_data.style.apply(highlight_max)
 
     print(print_data)
+
+    # from tabulate import tabulate
+    # pdtabulate=lambda df:tabulate(df,headers='keys',tablefmt='html')
+
+    # print(pdtabulate(print_data))
 
 main()
 
