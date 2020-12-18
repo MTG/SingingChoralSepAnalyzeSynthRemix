@@ -110,13 +110,13 @@ def highlight_max(data, color='yellow'):
 
 def main():
 
-    alto, fs = sf.read('/home/pc2752/share//Darius/data/satb_dst/test_dcs/raw_audio/DCS_TPQuartetA/DCS_TPQuartetA_alto_1.wav')
+    alto, fs = sf.read('./chorus_inputs/DCS_TPQuartetA_alto_1.wav')
 
-    bass, fs = sf.read('/home/pc2752/share//Darius/data/satb_dst/test_dcs/raw_audio/DCS_TPQuartetA/DCS_TPQuartetA_bass_1.wav')
+    bass, fs = sf.read('./chorus_inputs/DCS_TPQuartetA/DCS_TPQuartetA_bass_1.wav')
 
-    soprano, fs = sf.read('/home/pc2752/share//Darius/data/satb_dst/test_dcs/raw_audio/DCS_TPQuartetA/DCS_TPQuartetA_soprano_1.wav')
+    soprano, fs = sf.read('./chorus_inputs/DCS_TPQuartetA_soprano_1.wav')
 
-    tenor, fs = sf.read('/home/pc2752/share//Darius/data/satb_dst/test_dcs/raw_audio/DCS_TPQuartetA/DCS_TPQuartetA_tenor_1.wav')
+    tenor, fs = sf.read('./chorus_inputs/DCS_TPQuartetA_tenor_1.wav')
 
     start_time = time.time()
     outputs_dprnn = DPRNN(config.config_dprnn)
