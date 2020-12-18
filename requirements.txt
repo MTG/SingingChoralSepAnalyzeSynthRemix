@@ -12,11 +12,10 @@ pandas==1.1.4
 pyjwt==1.7.1
 pyopenssl==19.1.0
 pyparsing==2.4.7
-pysocks==1.7.1==py37he5f6b98_2
+pysocks==1.7.1
 pysptk==0.1.18
 pystoi==0.3.
-python-dateutil==2.8.1
-python_abi==3.7==1_cp37m
+
 pytorch-lightning==0.9.0
 pytorch-ranger==0.1.1
 pytz==2020.4
