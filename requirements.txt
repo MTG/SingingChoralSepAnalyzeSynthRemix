@@ -45,4 +45,3 @@ torchaudio==0.7.0
 torchvision==0.8.1+cu101
 tqdm==4.51.0
 vamp==1.1.0
-webencodings==0.5.1==py37_1
