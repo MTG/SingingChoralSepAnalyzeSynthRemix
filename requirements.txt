@@ -15,10 +15,10 @@ blas=1.0=openblas
 blinker=1.4=py_1
 brotlipy=0.7.0=py37hb5d75c8_1001
 c-ares=1.16.1=h516909a_3
-ca-certificates=2020.10.14=0
+ca-certificates=2020.12.8=h06a4308_0
 cached-property=1.5.2=pypi_0
 cachetools=4.1.1=py_0
-certifi=2020.6.20=pyhd3eb1b0_3
+certifi=2020.12.5=py37h06a4308_0
 cffi=1.14.3=py37he30daa8_0
 chardet=3.0.4=py37he5f6b98_1008
 click=7.1.2=pyh9f0ad1d_0
@@ -43,6 +43,7 @@ h5py=3.0.0=pypi_0
 hdf5=1.10.6=hb1b8bf9_0
 idna=2.10=pyh9f0ad1d_0
 importlib-metadata=2.0.0=py_1
+jinja2=2.11.2=py_0
 joblib=0.17.0=pypi_0
 jsonpickle=0.9.6=pypi_0
 keras-applications=1.0.8=py_1
@@ -63,6 +64,7 @@ librosa=0.8.0=pypi_0
 libstdcxx-ng=9.1.0=hdf63c60_0
 llvmlite=0.34.0=pypi_0
 markdown=3.3.3=pyh9f0ad1d_0
+markupsafe=1.1.1=py37h14c3975_1
 matplotlib=3.3.2=pypi_0
 mir-eval=0.6=pypi_0
 multidict=4.7.5=py37h8f50634_2
@@ -71,7 +73,7 @@ ncurses=6.2=he6710b0_1
 numba=0.51.2=pypi_0
 numpy=1.19.4=pypi_0
 oauthlib=3.0.1=py_0
-openssl=1.1.1h=h7b6447c_0
+openssl=1.1.1i=h27cfd23_0
 opt-einsum=3.3.0=pypi_0
 opt_einsum=3.1.0=py_0
 packaging=20.4=pypi_0
@@ -115,6 +117,7 @@ six=1.15.0=pyh9f0ad1d_0
 smmap=3.0.4=pypi_0
 soundfile=0.10.3.post1=pypi_0
 sqlite=3.33.0=h62c20be_0
+tabulate=0.8.7=pypi_0
 tensorboard=1.14.0=pypi_0
 tensorboard-plugin-wit=1.7.0=pyh9f0ad1d_0
 tensorboardx=2.1=pypi_0
