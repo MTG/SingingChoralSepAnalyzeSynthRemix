@@ -28,14 +28,14 @@ sacred==0.7.3
 scikit-learn==0.23.2
 scipy==1.5.3
 seaborn==0.11.0
-setuptools==50.3.0==py37hb0f4dca_1
-six==1.15.0==pyh9f0ad1d_0
+
+six==1.15.0
 smmap==3.0.4
 soundfile==0.10.3.post1
 sqlite==3.33.0==h62c20be_0
 tabulate==0.8.7
 tensorboard==1.14.0
-tensorboard-plugin-wit==1.7.0==pyh9f0ad1d_0
+
 tensorboardx==2.1
 tensorflow==1.15.0==mkl_py37h28c19af_0
 tensorflow-base==1.15.0==mkl_py37he1670d9_0
