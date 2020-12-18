@@ -28,7 +28,7 @@ def convtasnet(conf):
     from asteroid.utils import tensors_to_device
     from asteroid.models import save_publishable
 
-    model_path = ',/models/convtasnet_usecase2.pth'
+    model_path = './models/convtasnet_usecase2.pth'
     model = ConvTasNet.from_pretrained(model_path)
     # Handle device placement
     if conf["use_gpu"]:
@@ -76,7 +76,7 @@ def DPRNN(conf):
     from asteroid.utils import tensors_to_device
     from asteroid.models import save_publishable
 
-    model_path = os.path.join(conf["exp_dir"], "best_model.pth")
+    model_path = "./models/dprnn_usecase1"
     model = DPRNNTasNet.from_pretrained(model_path)
     # Handle device placement
     if conf["use_gpu"]:

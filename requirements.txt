@@ -37,7 +37,6 @@ tensorboard==1.14.0
 
 tensorboardx==2.1
 tensorflow==1.15.0
-tensorflow-base==1.15.0
 tensorflow-estimator==1.14.0
 
 torch==1.7.0+cu101
