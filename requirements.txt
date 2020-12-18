@@ -36,8 +36,8 @@ tabulate==0.8.7
 tensorboard==1.14.0
 
 tensorboardx==2.1
-tensorflow==1.15.0==mkl_py37h28c19af_0
-tensorflow-base==1.15.0==mkl_py37he1670d9_0
+tensorflow==1.15.0
+tensorflow-base==1.15.0
 tensorflow-estimator==1.14.0
 
 torch==1.7.0+cu101
