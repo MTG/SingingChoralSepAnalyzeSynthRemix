@@ -1,0 +1,33 @@
+# Filterbank config
+filterbank:
+  n_filters: 512
+  kernel_size: 16
+  stride: 8
+# Network config
+masknet:
+  n_blocks: 8
+  n_repeats: 3
+  mask_act: relu
+  bn_chan: 128
+  skip_chan: 128
+  hid_chan: 512
+# Training config
+training:
+  epochs: 2000
+  batch_size: 2
+  num_workers: 4
+  half_lr: yes
+  early_stop: no
+# Optim config
+optim:
+  optimizer: adam
+  lr: 0.001
+  weight_decay: 0.
+# Data config
+data:
+  train_dir: /home/pc2752/share/Darius/Wave-U-Net/satb_dataset_all.hdf5
+  valid_dir: /home/pc2752/share/Darius/Wave-U-Net/satb_dataset_all.hdf5
+  task: sep_clean
+  nondefault_nsrc:
+  sample_rate: 22020
+  mode: min
