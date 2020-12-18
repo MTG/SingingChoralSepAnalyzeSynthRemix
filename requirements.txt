@@ -1,7 +1,5 @@
-acoufe==0.1
-
 h5py==3.0.0
-hdf5==1.10.6==hb1b8bf9_0
+hdf5==1.10.6
 
 keras-applications==1.0.8
 keras-preprocessing==1.1.2
