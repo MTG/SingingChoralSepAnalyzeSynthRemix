@@ -157,6 +157,6 @@ def main():
     # pdtabulate=lambda df:tabulate(df,headers='keys',tablefmt='html')
 
     # print(pdtabulate(print_data))
-
-main()
+if __name__ == '__main__':
+    main()
 
