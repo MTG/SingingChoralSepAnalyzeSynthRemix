@@ -110,4 +110,6 @@ if __name__ == "__main__":
     #         "the one from training, be sure this is what you want."
     #     )
 
+    import pdb;pdb.set_trace()
+
     main(arg_dic)
