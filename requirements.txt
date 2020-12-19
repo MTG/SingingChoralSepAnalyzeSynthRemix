@@ -1,15 +1,13 @@
-h5py==3.0.0
-keras-applications==1.0.8
-keras-preprocessing==1.1.2
+h5py
+keras-applications
+keras-preprocessing
 
-librosa==0.8.0
+librosa
+mir-eval
 
-llvmlite==0.32.1
-mir-eval==0.6
+pandas
 
-pandas==1.1.4
-
-pyjwt==1.7.1
+pyjw
 pyopenssl==19.1.0
 pyparsing==2.4.7
 pysocks==1.7.1
