@@ -4,7 +4,7 @@ keras-preprocessing==1.1.2
 
 librosa==0.8.0
 
-llvmlite==0.34.0
+llvmlite==0.32.1
 mir-eval==0.6
 
 pandas==1.1.4
