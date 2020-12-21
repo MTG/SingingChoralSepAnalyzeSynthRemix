@@ -112,7 +112,7 @@ def main():
 
     alto, fs = sf.read('./chorus_inputs/DCS_TPQuartetA_alto_1.wav')
 
-    bass, fs = sf.read('./chorus_inputs/DCS_TPQuartetA/DCS_TPQuartetA_bass_1.wav')
+    bass, fs = sf.read('./chorus_inputs/DCS_TPQuartetA_bass_1.wav')
 
     soprano, fs = sf.read('./chorus_inputs/DCS_TPQuartetA_soprano_1.wav')
 

@@ -37,7 +37,7 @@ cnfig_unet_baseline_csd_usecase2 = {'model_config':\
  'num_sources': 4, \
  'num_channels': 1}, \
  'model_path': './models/968405-112000', \
- 'input_path': '/home/pc2752/share//Darius/Wave-U-Net/test_set_mixes/dcs/DCS_TPQuartetA_mix.wav',\
+ 'input_path': './chorus_inputs/DCS_TPQuartetA_mix.wav',\
  'experiment_id': 'unet_baseline_csd_usecase2'}
 
 cnfig_waveunet_all_usecase2 = {'model_config': {'musdb_path': './data/musdb18', 
