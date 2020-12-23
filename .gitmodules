@@ -10,3 +10,6 @@
 [submodule "asteroid"]
 	path = asteroid
 	url = https://github.com/pc2752/asteroid.git
+[submodule "crepe"]
+	path = crepe
+	url = https://github.com/pc2752/crepe.git

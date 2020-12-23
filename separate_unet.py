@@ -2,6 +2,7 @@ import sys
 sys.path.append('./Wave-U-Net')
 import Evaluate
 import os
+import soundfile as sf
 
 
 cfg = {'model_config':\
@@ -52,5 +53,6 @@ input_path = os.path.join("/home/pc2752/share/Darius/Wave-U-Net/test_set_mixes",
 
 output_path = './'
 
-Evaluate.produce_source_estimates(model_config, model_path, input_path, output_path)
+outputs = Evaluate.produce_source_estimates(model_config, model_path, input_path, output_path)
 
+sf.write('./output.wav', outputs['soprano'], 22050)
