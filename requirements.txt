@@ -2,7 +2,7 @@ h5py
 keras-applications
 keras-preprocessing
 
-librosa
+librosa==0.8.0
 mir-eval
 
 llvmlite==0.32.1
